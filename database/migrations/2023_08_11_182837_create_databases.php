@@ -67,7 +67,6 @@ return new class extends Migration
             $table->string('paymentType')->index();
             $table->string('status')->index();
             $table->string('paymentstatus')->index();
-            $table->string('paymentType')->index();
             $table->integer('userId')->index();
             $table->integer('AgentId')->index();
             $table->integer('addressId');
@@ -112,7 +111,7 @@ return new class extends Migration
             $table->String('gps');
             $table->integer('floor');
             $table->integer('buliding');
-            $table->integer('apartment ');
+            $table->integer('apartment');
             $table->timestamps();
         });
         Schema::create('areas', function (Blueprint $table) {
