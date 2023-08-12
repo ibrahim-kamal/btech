@@ -14,12 +14,11 @@ return new class extends Migration
     public function up()
     {
         Schema::create('products', function (Blueprint $table) {
-            $table->id();
+            $table->integer('id');
             $table->string('name' , 255);
             $table->text('images');
             $table->boolean('active');
             $table->integer('number');
-            $table->integer('langId');
             $table->double('discount');
             $table->double('price');
             $table->double('oldPrice');
@@ -30,33 +29,48 @@ return new class extends Migration
             $table->string('code' , 255)->index();
             $table->integer('brandId')->index();
             $table->integer('catId')->index();
+            $table->integer('langId')->default(1);
+            $table->primary(['id' , 'langId']);
             $table->timestamps();
+            $table->increments('id')->change();
         });
         Schema::create('sizes', function (Blueprint $table) {
-            $table->id();
+            $table->integer('id');
             $table->string('name' , 255);
             $table->boolean('active');
+            $table->integer('langId')->default(1);
+            $table->primary(['id' , 'langId']);
             $table->timestamps();
+            $table->increments('id')->change();
         });
         Schema::create('brands', function (Blueprint $table) {
-            $table->id();
+            $table->integer('id');
             $table->string('name' , 255);
             $table->boolean('active');
+            $table->integer('langId')->default(1);
+            $table->primary(['id' , 'langId']);
             $table->timestamps();
+            $table->increments('id')->change();
         });
         Schema::create('categories', function (Blueprint $table) {
-            $table->id();
-            $table->string('name' , 255);
+            $table->integer('id');
             $table->integer('parent');
+            $table->string('name' , 255);
             $table->boolean('active');
+            $table->integer('langId')->default(1);
+            $table->primary(['id' , 'langId']);
             $table->timestamps();
+            $table->increments('id')->change();
         });
         Schema::create('colors', function (Blueprint $table) {
-            $table->id();
+            $table->integer('id');
             $table->string('name' , 255);
-            $table->string('code' , 255);
             $table->boolean('active');
+            $table->integer('langId')->default(1);
+            $table->primary(['id' , 'langId']);
             $table->timestamps();
+            $table->increments('id')->change();
+            $table->string('code' , 255);
         });
 
         Schema::create('orders', function (Blueprint $table) {
@@ -115,10 +129,15 @@ return new class extends Migration
             $table->timestamps();
         });
         Schema::create('areas', function (Blueprint $table) {
-            $table->id();
+            $table->integer('id');
             $table->integer('parent');
             $table->string('name');
+            $table->string('ar_name');
+            $table->string('en_name');
+            $table->integer('langId')->default(1);
+            $table->primary(['id' , 'langId']);
             $table->timestamps();
+            $table->increments('id')->change();
         });
         Schema::create('productSize', function (Blueprint $table) {
             $table->id();
@@ -130,7 +149,7 @@ return new class extends Migration
             $table->timestamps();
         });
         Schema::create('pages', function (Blueprint $table) {
-            $table->id();
+            $table->integer('id');
             $table->string('name');
             $table->string('slug');
             $table->string('url');
@@ -139,23 +158,32 @@ return new class extends Migration
             $table->integer('parent');
             $table->text('description');
             $table->text('content');
+            $table->integer('langId')->default(1);
+            $table->primary(['id' , 'langId']);
             $table->timestamps();
+            $table->increments('id')->change();
         });
         Schema::create('modules', function (Blueprint $table) {
-            $table->id();
+            $table->integer('id');
             $table->string('name');
             $table->string('slug');
             $table->string('url');
             $table->integer('parent');
+            $table->integer('langId')->default(1);
+            $table->primary(['id' , 'langId']);
             $table->timestamps();
+            $table->increments('id')->change();
         });
         Schema::create('salesModules', function (Blueprint $table) {
-            $table->id();
+            $table->integer('id');
             $table->string('name');
             $table->string('slug');
             $table->string('url');
             $table->integer('parent');
+            $table->integer('langId')->default(1);
+            $table->primary(['id' , 'langId']);
             $table->timestamps();
+            $table->increments('id')->change();
         });
         Schema::create('adminPermission', function (Blueprint $table) {
             $table->id();
